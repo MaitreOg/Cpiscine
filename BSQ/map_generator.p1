@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+die "Usage: $0 x y density" unless (scalar(@ARGV) == 3);
+my ($x, $y, $density) = @ARGV;
+
+open(my $file_handle, '>', 'map') or die "Error: Cannot open the file 'map' : $!";
+
+print $file_handle "$y.ox\n";
+$density++;
+for (my $i = 0; $i < $y; $i++) {
+    for (my $j = 0; $j < $x; $j++) {
+        if (int(rand(100 / $density)) == 0) {
+            print $file_handle "o";
+        } else {
+            print $file_handle ".";
+        }
+    }
+    print $file_handle "\n";
+}
+
+close($file_handle);
